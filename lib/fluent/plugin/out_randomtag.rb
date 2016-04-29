@@ -5,7 +5,7 @@ module Fluent
   class RandomTagOutput < Output
     include Fluent::HandleTagNameMixin
 
-    Fluent::Plugin.register_output('random_tag', self)
+    Fluent::Plugin.register_output('randomtag', self)
 
     config_param :integer, :string, :default => nil
 
