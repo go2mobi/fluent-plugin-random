@@ -1,22 +1,20 @@
 # coding: utf-8
 
 require 'test_helper'
-require 'fluent/plugin/out_random'
+require 'fluent/plugin/out_randomtag'
 
-class RandomOutputTest < Test::Unit::TestCase
+class RandomTagOutputTest < Test::Unit::TestCase
   def setup
     Fluent::Test.setup
     @p = create_driver(%[
       strict true
-      add_tag_prefix random.
-      field key1
       integer 1..10
     ])
   end
 
   def create_driver(conf, tag = 'test')
     Fluent::Test::OutputTestDriver.new(
-      Fluent::RandomOutput, tag
+      Fluent::RandomTagOutput, tag
     ).configure(conf)
   end
 
@@ -63,12 +61,9 @@ class RandomOutputTest < Test::Unit::TestCase
     # All set
     d = create_driver(%[
       strict true
-      add_tag_prefix random.
-      field key1
       integer 1..10
     ])
 
-    assert_equal 'key1',    d.instance.field
   end
 
   def test_configure_on_failure
@@ -79,18 +74,10 @@ class RandomOutputTest < Test::Unit::TestCase
       ])
     end
 
-    # 'field' is missing
-    assert_raise(Fluent::ConfigError) do
-      create_driver(%[
-        add_tag_prefix random.
-        integer 1..10
-      ])
-    end
 
     # 'integer' is missing
     assert_raise(Fluent::ConfigError) do
       create_driver(%[
-        add_tag_prefix random.
         field key1
       ])
     end
@@ -98,8 +85,6 @@ class RandomOutputTest < Test::Unit::TestCase
 
   def test_emit
     d = create_driver(%[
-      add_tag_prefix random.
-      field key1
       integer 1..10
     ])
 
@@ -111,9 +96,7 @@ class RandomOutputTest < Test::Unit::TestCase
     emits = d.emits
 
     assert_equal 1,           emits.count
-    assert_equal 'random.test', emits[0][0]
     assert_equal 'bar', emits[0][2]['foo']
-    assert_includes 1..10, emits[0][2]['key1']
 
   end
 

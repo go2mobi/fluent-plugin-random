@@ -1,11 +1,11 @@
 Gem::Specification.new do |spec|
-  spec.name          = "fluent-plugin-random"
+  spec.name          = "fluent-plugin-randomtag"
   spec.version       = "0.0.1"
-  spec.authors       = ["Neozaru"]
+  spec.authors       = ["Neozaru","davidwin93"]
   spec.email         = ["neozaru@mailoo.org"]
-  spec.description   = %q{Fluentd custom plugin to generate random values}
-  spec.summary       = %q{Fluentd custom plugin to generate random values}
-  spec.homepage      = "https://github.com/Neozaru/fluent-plugin-random.git"
+  spec.description   = %q{Fluentd custom plugin to generate random values in tag}
+  spec.summary       = %q{Fluentd custom plugin to generate random values in tag}
+  spec.homepage      = "https://github.com/go2mobi/fluent-plugin-random"
   spec.license       = "WTFPL"
 
   spec.files         = `git ls-files`.split($/)
