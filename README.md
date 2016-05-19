@@ -1,21 +1,14 @@
-fluent-plugin-random
+fluent-plugin-randomtag
 ====================
 
-(Yet another Fluentd plugin)
-
-What
-----
-
-Allows to replace generate random value (only in integer at the time of this README) in a the specified key.
+Appends a random int to the start of a tag
 
 How
 ---
 
 You want to define :
-- Output field : **field**.
 - Integer interval : **integer** (syntax is the Ruby range..syntax)
 
-More random type could come in the future (float, string)
 
 Examples
 ========
@@ -25,23 +18,22 @@ Example 0
 
 ```
 <match *.test>
-    type random
-    add_tag_prefix random.
+    type randomtag
     integer 15..100
-    field key1
 </match>
 ```
 
 Example of records :
 ```
+logInput
 {
     'foo' => "bar"
 }
 ```
 ... *can* output :
 ```
+1.logInput
 {
-    'key1' => 42,
     'foo' => "bar"
 }
 ```
